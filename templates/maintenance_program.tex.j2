@@ -12,10 +12,10 @@
 ορισθέντα ως Επιβλέποντα της Εγκατάστασης για την εγκατάσταση με τα παρακάτω στοιχεία:
 
 \begin{tabular}{ll}
-Κωδικός πελάτη/Αριθμός αίτησης: & \VAR{project.application_no|tex} \\
-ΗΚΑΣΠ: & \VAR{project.hkasp|tex} \\
+Κωδικός πελάτη/Αριθμός αίτησης: & \VAR{template.application_no|tex} \\
+ΗΚΑΣΠ: & \VAR{template.hkasp|tex} \\
 Όνομα Πελάτη: & \VAR{customer.name|tex} \\
-Διεύθυνση: & \VAR{project.installation_address|tex} \\
+Διεύθυνση: & \VAR{template.installation_address|tex} \\
 \end{tabular}
 
 \section*{Γενικά}
@@ -141,10 +141,10 @@ O καταναλωτής θα πρέπει να δίνει προσοχή σε: 
 
 \begin{enumerate}
 \item Καταναλωτής: \VAR{customer.name|tex}
-\item Διεύθυνση: \VAR{project.installation_address|tex}
+\item Διεύθυνση: \VAR{template.installation_address|tex}
 \item Συντηρητής / Επιβλέπων: \VAR{business.supervisor_name|tex}
-\item Περιγραφή εγκατάστασης: λέβητας: \VAR{project.power_kw|tex} kW, \VAR{project.flow_m3h|tex} m\textsuperscript{3}/h\\
-Σύνολο: \VAR{project.power_kw|tex} kW, \VAR{project.flow_m3h|tex} m\textsuperscript{3}/h
+\item Περιγραφή εγκατάστασης: λέβητας: \VAR{template.power_kw|tex} kW, \VAR{template.flow_m3h|tex} m\textsuperscript{3}/h\\
+Σύνολο: \VAR{template.power_kw|tex} kW, \VAR{template.flow_m3h|tex} m\textsuperscript{3}/h
 \end{enumerate}
 
 H επιτήρηση και προγραμματισμένη (προληπτική) συντήρηση των συσκευών αερίου έγινε σύμφωνα

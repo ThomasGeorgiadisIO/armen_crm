@@ -63,12 +63,11 @@ def migrate(ods_path: str, db_path: str) -> int:
             customer_id = ds.create_customer(
                 conn, name=row["name"], address=row["address"], phone=row["phone"]
             )
-            ds.create_project(
-                conn,
-                customer_id,
-                application_no=row["application_no"],
-                hkasp=row["hkasp"],
-            )
+            # application_no/hkasp now live on Template (per-generation), not
+            # Project -- used here only to label the seed project; re-entered
+            # via the export wizard whenever a document is actually generated.
+            project_name = f"Αίτηση {row['application_no']}" if row["application_no"] else "Έργο 1"
+            ds.create_project(conn, customer_id, name=project_name)
         return len(customers)
     finally:
         conn.close()

@@ -15,6 +15,17 @@ CREATE TABLE IF NOT EXISTS customers (
 CREATE TABLE IF NOT EXISTS projects (
     id                                   INTEGER PRIMARY KEY AUTOINCREMENT,
     customer_id                          INTEGER NOT NULL REFERENCES customers(id) ON DELETE CASCADE,
+    name                                  TEXT NOT NULL,
+    created_at                           TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- Installation/boiler/meter details used to live on projects, but since they
+-- can change between visits/certificates for the same project, they're
+-- entered per-generation (via the export wizard) and stored here instead.
+CREATE TABLE IF NOT EXISTS templates (
+    id                                   INTEGER PRIMARY KEY AUTOINCREMENT,
+    project_id                           INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+    document_type                        TEXT NOT NULL,
     application_no                       TEXT,
     hkasp                                TEXT,
     installation_address                 TEXT,
@@ -31,21 +42,14 @@ CREATE TABLE IF NOT EXISTS projects (
     regulator_pressure_mbar              TEXT,
     strength_test_design_pressure_mbar   TEXT,
     tightness_test_design_pressure_mbar  TEXT,
-    created_at                           TEXT NOT NULL DEFAULT (datetime('now'))
-);
-
-CREATE TABLE IF NOT EXISTS templates (
-    id                           INTEGER PRIMARY KEY AUTOINCREMENT,
-    project_id                   INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
-    document_type                TEXT NOT NULL,
-    visit_date                   TEXT,
-    test_start_time              TEXT,
-    test_end_time                TEXT,
-    pass_fail                    TEXT,
-    next_maintenance_date        TEXT,
-    next_tightness_recheck_date  TEXT,
-    output_pdf_path               TEXT,
-    generated_at                  TEXT NOT NULL DEFAULT (datetime('now'))
+    visit_date                           TEXT,
+    test_start_time                      TEXT,
+    test_end_time                        TEXT,
+    pass_fail                            TEXT,
+    next_maintenance_date                TEXT,
+    next_tightness_recheck_date          TEXT,
+    output_pdf_path                      TEXT,
+    generated_at                         TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
 CREATE INDEX IF NOT EXISTS idx_projects_customer_id ON projects(customer_id);

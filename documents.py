@@ -88,9 +88,13 @@ def render_tex(document_type: str, context: dict) -> str:
 
 def build_context(customer, project, template_row) -> dict:
     """Join the Customer/Project/Template dataclasses + business constants
-    + computed mbar->mmHg conversions into the dict the templates expect."""
-    strength_mbar = project.strength_test_design_pressure_mbar or "0"
-    tightness_mbar = project.tightness_test_design_pressure_mbar or "0"
+    + computed mbar->mmHg conversions into the dict the templates expect.
+
+    Installation/boiler/meter details (application_no, hkasp, pressures,
+    etc.) live on `template_row`, not `project` -- they're entered fresh
+    per document generation since they can change between visits."""
+    strength_mbar = template_row.strength_test_design_pressure_mbar or "0"
+    tightness_mbar = template_row.tightness_test_design_pressure_mbar or "0"
     return {
         "customer": asdict(customer),
         "project": asdict(project),

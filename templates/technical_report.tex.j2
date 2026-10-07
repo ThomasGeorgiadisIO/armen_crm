@@ -7,14 +7,14 @@
 
 \section*{Στοιχεία Καταναλωτή}
 \begin{tabular}{ll}
-Διεύθυνση: & \VAR{project.installation_address|tex} \\
+Διεύθυνση: & \VAR{template.installation_address|tex} \\
 Ιδιοκτήτης ακινήτου: & \VAR{customer.name|tex} \\
 Χρήστης ακινήτου: & \VAR{customer.name|tex} \quad τηλ. \VAR{customer.phone|tex} \\
-Χρήση ακινήτου: & \VAR{project.property_use|tex} \\
-Χρήση αερίου: & \VAR{project.gas_use|tex} \\
-Οδός προσπέλασης: & \VAR{project.access_street|tex} \\
-ΗΚΑΣΠ: & \VAR{project.hkasp|tex} \\
-Κωδικός πελάτη/Αριθμός αίτησης: & \VAR{project.application_no|tex} \\
+Χρήση ακινήτου: & \VAR{template.property_use|tex} \\
+Χρήση αερίου: & \VAR{template.gas_use|tex} \\
+Οδός προσπέλασης: & \VAR{template.access_street|tex} \\
+ΗΚΑΣΠ: & \VAR{template.hkasp|tex} \\
+Κωδικός πελάτη/Αριθμός αίτησης: & \VAR{template.application_no|tex} \\
 \end{tabular}
 
 \section*{Στοιχεία Επιβλέποντα}
@@ -33,8 +33,8 @@
 
 \section*{Σύνδεση με Δίκτυο -- Ρύθμιση Πίεσης -- Μετρητής}
 
-Ο μετρητής τύπου \VAR{project.meter_type|tex} είναι εγκαταστημένος \VAR{project.meter_position|tex}.
-Η πίεση εξόδου του ρυθμιστή είναι \VAR{project.regulator_pressure_mbar|tex} mbar.
+Ο μετρητής τύπου \VAR{template.meter_type|tex} είναι εγκαταστημένος \VAR{template.meter_position|tex}.
+Η πίεση εξόδου του ρυθμιστή είναι \VAR{template.regulator_pressure_mbar|tex} mbar.
 
 \section*{Συσκευές Αερίου}
 
@@ -42,9 +42,9 @@
 \hline
 \textbf{Συσκευή} & \textbf{Μοντέλο} & \textbf{Τύπος} & \textbf{Ον. Ισχύς} & \textbf{Τεχνολογία} & \textbf{Τιμή σύνδεσης} \\
 \hline
-1. Λέβητας & \VAR{project.boiler_brand_model|tex} & \VAR{project.boiler_type|tex} & \VAR{project.power_kw|tex} kW & \VAR{project.technology|tex} & \VAR{project.flow_m3h|tex} m\textsuperscript{3}/h \\
+1. Λέβητας & \VAR{template.boiler_brand_model|tex} & \VAR{template.boiler_type|tex} & \VAR{template.power_kw|tex} kW & \VAR{template.technology|tex} & \VAR{template.flow_m3h|tex} m\textsuperscript{3}/h \\
 \hline
-\textbf{Σύνολο} & & & \textbf{\VAR{project.power_kw|tex} kW} & & \textbf{\VAR{project.flow_m3h|tex} m\textsuperscript{3}/h} \\
+\textbf{Σύνολο} & & & \textbf{\VAR{template.power_kw|tex} kW} & & \textbf{\VAR{template.flow_m3h|tex} m\textsuperscript{3}/h} \\
 \hline
 \end{tabular}
 
@@ -82,10 +82,10 @@ H απαγωγή των καυσαερίων για τον θερμαντήρα 
 \section*{Δοκιμή Εγκατάστασης Σωληνώσεων}
 
 H εγκατάσταση σωληνώσεων υπέστη επιτυχή δοκιμή φόρτισης με αέρα υπό πίεση
-\VAR{project.strength_test_design_pressure_mbar|tex} mbar.
+\VAR{template.strength_test_design_pressure_mbar|tex} mbar.
 
 H εγκατάσταση σωληνώσεων υπέστη επιτυχή δοκιμή στεγανότητας με αέρα υπό πίεση
-\VAR{project.tightness_test_design_pressure_mbar|tex} mbar.
+\VAR{template.tightness_test_design_pressure_mbar|tex} mbar.
 
 Εκδόθηκε πιστοποιητικό για την δοκιμή αντοχής και στεγανότητας.
 

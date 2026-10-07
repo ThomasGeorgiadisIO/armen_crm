@@ -72,12 +72,9 @@ class App:
         search.bind("<KeyRelease>", lambda e: self.refresh_projects(search.get()))
         self.project_search_var = search
 
-        columns = ("application_no", "hkasp", "boiler_brand_model", "installation_address")
+        columns = ("name",)
         tree = ttk.Treeview(frame, columns=columns, show="headings", selectmode="browse")
-        tree.heading("application_no", text="Αρ. Αίτησης")
-        tree.heading("hkasp", text="ΗΚΑΣΠ")
-        tree.heading("boiler_brand_model", text="Λέβητας")
-        tree.heading("installation_address", text="Διεύθυνση Εγκατάστασης")
+        tree.heading("name", text="Έργο")
         tree.pack(fill=tk.BOTH, expand=True)
         tree.bind("<<TreeviewSelect>>", self.on_select_project)
         self.projects_tree = tree
@@ -121,14 +118,9 @@ class App:
         self.projects_tree.delete(*self.projects_tree.get_children())
         if self.selected_customer_id is not None:
             for p in ds.list_projects_for_customer(self.conn, self.selected_customer_id):
-                if search_text and search_text.lower() not in " ".join(
-                    filter(None, [p.application_no, p.hkasp, p.boiler_brand_model, p.installation_address])
-                ).lower():
+                if search_text and search_text.lower() not in (p.name or "").lower():
                     continue
-                self.projects_tree.insert(
-                    "", tk.END, iid=str(p.id),
-                    values=(p.application_no or "", p.hkasp or "", p.boiler_brand_model or "", p.installation_address or ""),
-                )
+                self.projects_tree.insert("", tk.END, iid=str(p.id), values=(p.name,))
         self.refresh_templates()
 
     def refresh_templates(self):
@@ -232,6 +224,8 @@ class App:
         project = ds.get_project(self.conn, self.selected_project_id)
         customer = ds.get_customer(self.conn, project.customer_id)
 
+        installation_fields = {k: answers[k] for k in ds.INSTALLATION_FIELDS}
+
         generated_paths = []
         for document_type in answers["document_types"]:
             template_id = ds.create_template(
@@ -242,6 +236,7 @@ class App:
                 test_start_time=answers["test_start_time"],
                 test_end_time=answers["test_end_time"],
                 pass_fail=answers["pass_fail"],
+                **installation_fields,
             )
             template_row = ds.get_template(self.conn, template_id)
 

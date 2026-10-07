@@ -38,25 +38,32 @@ def test_phone_and_hkasp_never_numeric(conn):
     assert customer.phone == "30090000006756"
     assert isinstance(customer.phone, str)
 
-    pid = ds.create_project(conn, cid, hkasp="30090000006756", application_no="6756")
-    project = ds.get_project(conn, pid)
-    assert project.hkasp == "30090000006756"
-    assert project.application_no == "6756"
-    assert isinstance(project.hkasp, str)
-    assert isinstance(project.application_no, str)
+    pid = ds.create_project(conn, cid, name="Αίτηση 6756")
+    tid = ds.create_template(
+        conn, pid, "compliance", visit_date="2026-09-12",
+        hkasp="30090000006756", application_no="6756",
+    )
+    template = ds.get_template(conn, tid)
+    assert template.hkasp == "30090000006756"
+    assert template.application_no == "6756"
+    assert isinstance(template.hkasp, str)
+    assert isinstance(template.application_no, str)
 
 
 def test_project_crud_and_cascade(conn):
     cid = ds.create_customer(conn, "Customer A")
-    pid = ds.create_project(conn, cid, application_no="123", boiler_brand_model="Sime MIA HE 25")
+    pid = ds.create_project(conn, cid, name="Αίτηση 123")
     project = ds.get_project(conn, pid)
-    assert project.application_no == "123"
-    assert project.boiler_brand_model == "Sime MIA HE 25"
+    assert project.name == "Αίτηση 123"
 
     assert len(ds.list_projects_for_customer(conn, cid)) == 1
 
-    tid = ds.create_template(conn, pid, "compliance", visit_date="2026-09-12")
+    tid = ds.create_template(
+        conn, pid, "compliance", visit_date="2026-09-12",
+        boiler_brand_model="Sime MIA HE 25",
+    )
     template = ds.get_template(conn, tid)
+    assert template.boiler_brand_model == "Sime MIA HE 25"
     assert template.next_maintenance_date == "2027-09-12"
     assert template.next_tightness_recheck_date == "2030-09-12"
 
@@ -77,7 +84,7 @@ def test_add_years_handles_leap_day():
 
 def test_set_template_output_path(conn):
     cid = ds.create_customer(conn, "Customer B")
-    pid = ds.create_project(conn, cid)
+    pid = ds.create_project(conn, cid, name="Project B")
     tid = ds.create_template(conn, pid, "technical_report", visit_date="2026-01-01")
     ds.set_template_output_path(conn, tid, "/output/Customer B/1/technical_report.pdf")
     template = ds.get_template(conn, tid)
