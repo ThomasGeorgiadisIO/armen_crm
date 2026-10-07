@@ -161,4 +161,25 @@ Every variable in these documents maps to one of: a `customers` field, a `projec
 
 ## Status
 
-No app code written yet. Start at milestone 1 in the Ordered roadmap above.
+Milestones 1-9 implemented and verified on Linux (dev shell):
+- Schema/data layer: 5 passing tests (`tests/test_data_store.py`), including the
+  float-corruption and cascade-delete guards.
+- Migration: `migrate_from_ods.py` run once against the real `Customers.ods`;
+  `customers.db` committed is pre-seeded with the 5 real customers (exact-string
+  `hkasp`/`application_no`/`phone`, verified).
+- GUI: three-panel Customers -> Projects -> Templates app, full CRUD, live search
+  on both Customers and Projects, all exercised via scripted Tkinter smoke tests
+  (see conversation history) plus a real screenshot.
+- Documents: all 4 templates converted to `templates/*.tex.j2`, rendered with
+  Jinja2 + compiled with `tectonic`, verified end-to-end through the actual
+  GUI/DB code path -- output lands at `output/<customer>/<project_id>/<type>.pdf`
+  and a `templates` history row is recorded per generation.
+- Packaging: `.github/workflows/build-windows.yml` written (PyInstaller +
+  tectonic.exe v0.17.0 from the tectonic GitHub release + bundled fonts/templates).
+
+**Not yet done / open risk:** the Windows CI build has not actually been run,
+and nothing here has been tested on real Windows hardware. The `BASE_DIR` vs
+`app_dir()` distinction in `documents.py`/`paths.py` (bundled read-only
+resources vs. the real .exe's directory) is believed correct for a PyInstaller
+`--onefile` build but is unverified in practice -- treat that as the first
+thing to check if the built `.exe` fails to find `tectonic.exe` or the fonts.

@@ -1,0 +1,96 @@
+\BLOCK{ include "_preamble.tex.j2" }
+\begin{document}
+
+\begin{center}
+\textbf{\large ΠΙΣΤΟΠΟΙΗΤΙΚΟ ΔΟΚΙΜΗΣ ΑΝΤΟΧΗΣ ΚΑΙ ΣΤΕΓΑΝΟΤΗΤΑΣ}
+\end{center}
+
+\begin{tabular}{|p{3.2cm}|p{12.5cm}|}
+\hline
+Καταναλωτής & \VAR{customer.name|tex} \quad\quad Κωδικός Πελάτη/Αρ. Αίτησης \VAR{project.application_no|tex} \\
+\hline
+ & ΗΚΑΣΠ \VAR{project.hkasp|tex} \\
+\hline
+Διεύθυνση: & \VAR{project.installation_address|tex} \\
+\hline
+\multicolumn{2}{|p{16cm}|}{Περιγραφή της εγκατάστασης των σωληνώσεων: οι σωληνώσεις αερίου είναι
+ορατές, και κατασκευασμένες από γαλβανιζέ χαλυβδοσωλήνα. Το δίκτυο κατασκευάστηκε σύμφωνα με
+τον «Τεχνικό Κανονισμό Εσωτερικών Εγκαταστάσεων Φυσικού Αερίου με πίεση λειτουργίας έως και
+500 mbar» (ΦΕΚ 976/28-3-2012)} \\
+\hline
+\multicolumn{2}{|p{16cm}|}{ΠΑΡΟΧΗ: \VAR{project.flow_m3h|tex} m\textsuperscript{3}/h} \\
+\hline
+\end{tabular}
+
+\vspace{0.5cm}
+\begin{center}\textbf{ΠΕΡΙΓΡΑΦΗ ΤΗΣ ΔΟΚΙΜΗΣ}\end{center}
+
+Μέγιστη πίεση λειτουργίας της εγκατάστασης \VAR{project.regulator_pressure_mbar|tex} mbar
+
+\vspace{0.3cm}
+\begin{tabular}{|p{7.8cm}|p{7.8cm}|}
+\hline
+\textbf{ΔΟΚΙΜΗ ΑΝΤΟΧΗΣ} & \textbf{ΔΟΚΙΜΗ ΣΤΕΓΑΝΟΤΗΤΑΣ} \\
+\hline
+ΗΜΕΡΟΜΗΝΙΑ ΕΚΤΕΛΕΣΗΣ \VAR{template.visit_date|tex} & ΗΜΕΡΟΜΗΝΙΑ ΕΚΤΕΛΕΣΗΣ \VAR{template.visit_date|tex} \\
+\hline
+Πίεση δοκιμής Ρ=\VAR{strength_pressure_bar|tex} bar (\VAR{strength_pressure_mmhg|tex} mmHg) &
+Πίεση δοκιμής Ρ=\VAR{project.tightness_test_design_pressure_mbar|tex} mbar (\VAR{tightness_pressure_mmhg|tex} mmHg) \\
+\hline
+Ρευστό δοκιμής: Αέρας & Ρευστό δοκιμής: Αέρας \\
+\hline
+Όργανο μέτρησης: Μανόμετρο τύπου U & Όργανο μέτρησης: Μανόμετρο τύπου U \\
+\hline
+Ώρα έναρξης δοκιμής: \VAR{template.test_start_time|tex} πίεση \VAR{strength_pressure_mmhg|tex} mmHg &
+Ώρα έναρξης δοκιμής: \VAR{template.test_start_time|tex} πίεση \VAR{tightness_pressure_mmhg|tex} mmHg \\
+\hline
+Ώρα τέλους δοκιμής: \VAR{template.test_end_time|tex} πίεση \VAR{strength_pressure_mmhg|tex} mmHg &
+Ώρα τέλους δοκιμής: \VAR{template.test_end_time|tex} πίεση \VAR{tightness_pressure_mmhg|tex} mmHg \\
+\hline
+\BLOCK{ if template.pass_fail == "pass" }
+Έκβαση θετική [X]\quad Έκβαση αρνητική [\ ] & Έκβαση θετική [X]\quad Έκβαση αρνητική [\ ] \\
+\BLOCK{ else }
+Έκβαση θετική [\ ]\quad Έκβαση αρνητική [X] & Έκβαση θετική [\ ]\quad Έκβαση αρνητική [X] \\
+\BLOCK{ endif }
+\hline
+\end{tabular}
+
+\vspace{0.4cm}
+Βεβαιώνεται ότι η εγκατάσταση αερίου πραγματοποιήθηκε σύμφωνα με την εγκεκριμένη μελέτη και
+πληροί τις διατάξεις του Τεχνικού Κανονισμού Εσωτερικών Εγκαταστάσεων Φυσικού Αερίου με πίεση
+λειτουργίας έως και 500 mbar (ΦΕΚ 976/28-3-2012).
+
+Στις εγκαταστάσεις που πραγματοποιήθηκαν χρησιμοποιήθηκαν εγκεκριμένα υλικά σύμφωνα με τις
+προδιαγραφές.
+
+Η δοκιμή αντοχής και στεγανότητας της εγκατάστασης σωληνώσεων αερίου που τοποθετήθηκε,
+πραγματοποιήθηκε σύμφωνα με το κεφάλαιο 10 του προαναφερόμενου κανονισμού. Βάση των δοκιμών
+που πραγματοποιήθηκαν, κρίνεται ότι η προσωρινή τροφοδότηση με φυσικό αέριο για την διεξαγωγή
+των μετρήσεων, μπορεί να γίνει με ασφάλεια.
+
+\vspace{0.4cm}
+\begin{tabular}{|p{7.8cm}|p{7.8cm}|}
+\hline
+\textbf{Εγκαταστάτης} & \textbf{Επιβλέπων Αερίου} \\
+\hline
+Όνομα \VAR{business.installer_name|tex} & Όνομα \VAR{business.supervisor_name|tex} \\
+\hline
+Αρ. μητρώου - ημ/νία έκδοσης \VAR{business.installer_registry_no|tex}-\VAR{business.installer_registry_date|tex} &
+Αρ. Μητρώου ΤΕΕ ή άλλου Φορέα \VAR{business.tee_registry_no|tex} \\
+\hline
+Φορέας θεώρησης Διεύθυνση \VAR{business.oversight_body|tex} & \\
+\hline
+Ημ/νία λήξης της Άδειας \VAR{business.installer_license_expiry|tex} & \\
+\hline
+Ειδίκευση Εγκαταστάτης Καύσης & \\
+\hline
+ & \\[1.2cm]
+Υπογραφή & Υπογραφή \\
+\hline
+\end{tabular}
+
+\vspace{0.4cm}
+Το παρόν πιστοποιητικό διαρκεί 4 έτη και εφόσον τηρούνται οι προϋποθέσεις των Κεφαλαίων 3,11 \& 12
+του Τεχνικού Κανονισμού.
+
+\end{document}

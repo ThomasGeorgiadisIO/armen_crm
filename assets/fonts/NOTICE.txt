@@ -1,0 +1,8 @@
+DejaVu Serif (DejaVuSerif.ttf, DejaVuSerif-Bold.ttf, DejaVuSerif-Italic.ttf)
+
+Bundled here so generated certificates render correctly (incl. Greek
+glyphs) on a Windows machine with no LaTeX/font setup of its own.
+
+DejaVu Fonts are released under a permissive, GPL-compatible license
+(bitstream Vera + public-domain-like DejaVu changes). See
+https://dejavu-fonts.github.io/License.html for the full license text.

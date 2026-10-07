@@ -1,0 +1,48 @@
+name: Build Windows exe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+env:
+  TECTONIC_VERSION: "0.17.0"
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Download tectonic.exe
+        shell: pwsh
+        run: |
+          $url = "https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%40$env:TECTONIC_VERSION/tectonic-$env:TECTONIC_VERSION-x86_64-pc-windows-msvc.zip"
+          Invoke-WebRequest -Uri $url -OutFile tectonic.zip
+          Expand-Archive -Path tectonic.zip -DestinationPath . -Force
+          if (!(Test-Path tectonic.exe)) { throw "tectonic.exe not found after extraction" }
+
+      - name: Build exe with PyInstaller
+        shell: pwsh
+        run: |
+          pyinstaller --onefile --noconsole --name ArmenCRM `
+            --add-binary "tectonic.exe;." `
+            --add-data "templates;templates" `
+            --add-data "assets;assets" `
+            --add-data "schema.sql;." `
+            main.py
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ArmenCRM-windows
+          path: dist/ArmenCRM.exe

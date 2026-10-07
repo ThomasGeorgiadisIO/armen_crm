@@ -1,0 +1,3 @@
+-r requirements.txt
+odfpy>=1.4.1
+pytest>=7.0
